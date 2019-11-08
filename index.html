@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8"/>
+	<title>浙江嘉丰机电-后台管理系统</title>
+	<link rel="icon" type="image/x-icon" href="image/logos.jpg"/>
+	<link rel="stylesheet" type="text/css" href="css/index.css"/>
+	<script type="text/javascript" src="js/jquery-3.3.1.js"></script>
+	<script type="text/javascript" src="js/wm.js"></script>
+	<script type="text/javascript" src="js/object.js"></script>
+</head>
+<body>
+	<script type="text/javascript" src="js/header.js"></script>
+	<div class="index_home">
+		<div class="index_status">
+			<div class="index_status_list">
+				<div class="index_status_list_left" style="width: 100%; text-align: center">
+					<div class="index_status_list_left_top  index_status_list_left_top_total" style="width: 100%; text-align: center"></div>
+					<div class="index_status_list_left_bottom" style="width: 100%; text-align: center">总台数</div>
+				</div>
+				<div class="clear"></div>
+			</div>
+			<div class="index_status_list">
+				<div class="index_status_list_left">
+					<div class="index_status_list_left_top index_status_list_left_top_nornal"></div>
+					<div class="index_status_list_left_bottom">正在运行</div>
+				</div>
+				<div class="index_status_list_right">
+					<canvas id="canvas1" width="80" height="80"></canvas>
+					<div class="index_status_list_right_item index_status_list_right_item_nornal"></div>
+				</div>
+				<div class="clear"></div>
+			</div>
+			<div class="index_status_list">
+				<div class="index_status_list_left">
+					<div class="index_status_list_left_top index_status_list_left_top_bad"></div>
+					<div class="index_status_list_left_bottom">异常设备</div>
+				</div>
+				<div class="index_status_list_right">
+					<canvas id="canvas2" width="80" height="80"></canvas>
+					<div class="index_status_list_right_item index_status_list_right_item_bad"></div>
+				</div>
+				<div class="clear"></div>
+			</div>
+			<div class="clear"></div>
+		</div>
+		<div class="index_inventory">
+			<div class="index_inventory_body">
+				<p class="index_inventory_p">库存预览</p>
+				<table class="index_inventory_table">
+					<thead class="index_inventory_thead">
+						<tr>
+							<th>序号</th>
+							<th>售货机名称</th>
+							<th>售货机编号</th>
+							<th>设备地址</th>
+							<th>设备状态</th>
+							<th>库存情况</th>
+							<th>数据时间</th>
+							<th>操作</th>
+						</tr>
+					</thead>
+					<tbody class="index_inventory_tbody">
+						<!-- <tr>
+							<td>1</td>
+							<td>测试001</td>
+							<td>test001</td>
+							<td>浙江嘉丰机电有限公司大门</td>
+							<td>在售</td>
+							<td><span>库存充足</span></td>
+							<td>2019-10-14 16:45:11</td>
+							<td><button>查看详情</button><button>刷新</button></td>
+						</tr> -->
+					</tbody>
+				</table>
+			</div>
+		</div>
+	</div>
+	<div class="index_fixed">
+		<div class="index_fixed_body">
+			<p class="index_fixed_p">库存详情<span class="index_fixed_close" onclick="this.parentNode.parentNode.parentNode.style.display='none';">×</span></p>
+			<table class="index_fixed_table">
+				<thead class="index_fixed_thead">
+					<tr>
+						<th>原料名称</th>
+						<th>配置量</th>
+						<th>预警量</th>
+						<th>停止量</th>
+						<th>库存余量</th>
+						<th>库存状况</th>
+					</tr>
+				</thead>
+				<tbody class="index_fixed_tbody"></tbody>
+			</table>
+		</div>
+	</div>
+	<script type="text/javascript" src="js/index.js"></script>
+</body>
+</html>

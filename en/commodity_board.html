@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8"/>
+	<title>商品管理</title>
+	<link rel="icon" type="image/x-icon" href="image/logos.jpg"/>
+	<link rel="stylesheet" type="text/css" href="css/index.css"/>
+	<link rel="stylesheet" type="text/css" href="css/commodity_board.css"/>
+	<link rel="stylesheet" type="text/css" href="../lib/import/style.css"/>
+	<script type="text/javascript" src="js/jquery-3.3.1.js"></script>
+	<script type="text/javascript" src="js/wm.js"></script>
+	<script type="text/javascript" src="js/object.js"></script>
+</head>
+<body>
+	<script type="text/javascript" src="js/header.js"></script>
+	<div class="operator_home">
+		<div class="operator_head">
+			<table>
+				<tr>
+					<td>Operator</td>
+					<td><input id="commodity_operators" class="operator_selects" type="text" readonly="readonly"/><b></b></td>
+				</tr>
+			</table>
+			<!-- <table>
+				<tr>
+					<td style="min-width: 60px;">输入查询</td>
+					<td><input type="text"/></td>
+				</tr>
+			</table> -->
+			<table>
+				<tr>
+					<td style="min-width: 60px;">Status</td>
+					<td><input id="commodity_status" class="item_select" type="text" readonly="readonly"/><b></b></td>
+				</tr>
+			</table>
+			<table>
+				<tr>
+					<td><button class="operator_home_head_submit"><img src="image/seachs.png"/>Search</button></td>
+					<td></td>
+				</tr>
+			</table>
+		</div>
+		<div class="operator_body">
+			<div class="operator_body_left"></div>
+			<div class="operator_body_right">
+				<div class="operator_body_right_head">
+					<button id="body_creat"><span>+</span>Create</button>
+					<button id="body_submit"><img src="image/bc.png"/>Save</button>					
+					<div class="operator_body_right_head_bottom">
+						<ul class="operator_body_right_head_bottom_ul"></ul>
+					</div>
+				</div>
+				<div class="operator_body_right_foot">
+					<div class="operator_body_right_foot_list" data-menuid="203001">
+						<div class="operator_body_right_foot_item">
+							<p>Details</p>
+							<table>
+								<tr>
+									<td>Operator : <span>*</span></td>
+									<td><input id="commodity_operator" class="operator_select" style="cursor: pointer;" type="text" readonly="readonly"/><b></b></td>
+								</tr>
+								<tr>
+									<td>Commodity ID : <span>*</span></td>
+									<td><input id="commodity_num" type="text" disabled="disabled" placeholder="Automatic Generation"/></td>
+								</tr>
+								<tr>
+									<td>Commodity : <span>*</span></td>
+									<td><input id="commodity_name" type="text"/></td>
+								</tr>
+								<tr>
+									<td>Shelf Life(hour): <span>*</span></td>
+									<td><input id="commodity_shelf" type="number"/></td>
+								</tr>
+								<tr>
+									<td>Standard Price : <span>*</span></td>
+									<td><input id="commodity_price" type="number"/></td>
+								</tr>
+								<tr>
+									<td valign="top">Cargo track : <span>*</span></td>
+									<td><div id="model_multiple" class="model_multiple"></div></td>
+								</tr>
+								<tr>
+									<td>Level Of Recommendation : </td>
+									<td>
+										<span class="detailed_operator_star"><img src="image/dxs.png"/></span>
+										<span class="detailed_operator_star"><img src="image/dxs.png"/></span>
+										<span class="detailed_operator_star"><img src="image/dxs.png"/></span>
+										<span class="detailed_operator_star"><img src="image/dxs.png"/></span>
+										<span class="detailed_operator_star"><img src="image/dxs.png"/></span>
+									</td>
+								</tr>
+								<tr>
+									<td>Bar Code : </td>
+									<td><input id="commodity_code" type="text"/></td>
+								</tr>
+								<tr>
+									<td>Infrared Heating Time(S):</td>
+									<td><input id="commodity_Infrared" type="number"/></td>
+								</tr>
+								<tr>
+									<td>Microwave Heating Time(S):</td>
+									<td><input id="commodity_microwave" type="number"/></td>
+								</tr>
+								<tr>
+									<td>Max Temperature(℃) : </td>
+									<td><input id="commodity_cooking" type="number"/></td>
+								</tr>
+								<tr>
+									<td>Supplier : </td>
+									<td><input id="commodity_supplier" type="text"/></td>
+								</tr>
+								<tr>
+									<td>Menu Picture : </td>
+									<td><div class="detailed_operator_pickimg detailed_operator_img"></div><input id="detailed_operator_pickimg" class="detailed_operator_int" accept="image/gif,image/jpeg,image/jpg,image/png" type="file" data-url=""/><button id="detailed_operator_pickimg_btns" class="detailed_operator_img_btns">Upload</button><button id="detailed_operator_pickimg_btn" class="detailed_operator_img_btn">Preview</button></td>
+								</tr>
+								<tr>
+									<td>Payment Picture : </td>
+									<td><div class="detailed_operator_orderimg detailed_operator_img"></div><input id="detailed_operator_orderimg" class="detailed_operator_int" accept="image/gif,image/jpeg,image/jpg,image/png" type="file" data-url=""/><button id="detailed_operator_orderimg_btns" class="detailed_operator_img_btns">Upload</button><button id="detailed_operator_orderimg_btn" class="detailed_operator_img_btn">Preview</button></td>
+								</tr>
+								<tr>
+									<td>nutrition : </td>
+									<td><div class="detailed_operator_ingredientimg detailed_operator_imgs"></div><input id="detailed_operator_ingredientimg" accept="image/gif,image/jpeg,image/jpg,image/png" type="file" data-url=""/><button id="detailed_operator_ingredientimg_btns" class="detailed_operator_img_btns_b">Upload</button><button id="detailed_operator_ingredientimg_btn" class="detailed_operator_img_btn">Preview</button><button id="detailed_operator_ingredientimg_delete_btn" class="detailed_operator_img_btn">Delete</button></td>
+								</tr>
+								<tr>
+									<td>Remark : </td>
+									<td><textarea id="commodity_remark" maxlength="100"></textarea></td>
+								</tr>
+								<tr>
+									<td><input id="detailed_operator_stop" type="checkbox"/>Stop</td>
+									<td>&nbsp;</td>
+								</tr>
+							</table>
+						</div>
+						<div class="clear"></div>
+					</div>
+				</div>
+			</div>
+			<div class="clear"></div>
+		</div>
+	</div>
+	<div class="image_fixed">
+		<img src=""/>
+	</div>
+	<div class="image_fixeds">
+	</div>
+	<script type="text/javascript" src="../lib/plupload-2.1.2/js/plupload.full.min.js"></script>
+	<script type="text/javascript" src="../lib/import/upload.js"></script>
+	<script type="text/javascript" src="js/commodity_board.js"></script>
+</body>
+</html>

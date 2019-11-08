@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<title></title>
+	<meta charset="utf-8"/>
+	<link rel="icon" type="image/x-icon" href="image/logos.jpg"/>
+	<link rel="stylesheet" type="text/css" href="css/index.css"/>
+	<link rel="stylesheet" type="text/css" href="css/advertise_board.css"/>
+	<link rel="stylesheet" type="text/css" href="../lib/import/style.css"/>
+	<script type="text/javascript" src="js/jquery-3.3.1.js"></script>
+	<script type="text/javascript" src="js/wm.js"></script>
+	<script type="text/javascript" src="js/object.js"></script>
+</head>
+<body>
+	<script type="text/javascript" src="js/header.js"></script>
+	<div class="user_home">
+		<div class="user_head">
+			<table>
+				<tr>
+					<td>Group</td>
+					<td><input id="user_head_group" class="user_head_grouping" type="text" readonly="readonly"/><b></b></td>
+				</tr>
+			</table>
+			<table>
+				<tr>
+					<td><button id="user_head_grouping" class="user_head_submit"><img src="image/seachs.png"/>Search</button></td>
+				</tr>
+			</table>
+		</div>
+		<div class="user_body">
+			<div class="user_body_left">
+			</div>
+			<div class="user_body_right">
+				<div class="user_body_right_foot">
+					<div class="user_body_right_foot_fixed">
+						<table class="user_body_right_foot_fixed_table">
+							<thead class="user_body_right_foot_fixed_thead">
+								<tr>
+									<td>No.</td>
+									<td>Type</td>
+									<td>URL</td>
+									<td>Duration(S)</td>
+									<td>Start Time</td>
+									<td>End Time</td>
+									<td>Billboard</td>
+									<td>Operating</td>
+								</tr>
+							</thead>
+							<tbody class="user_body_right_foot_fixed_tbody">
+								<tr class="user_body_right_foot_fixed_tbody_head">
+									<td></td>
+									<td></td>
+									<td></td>
+									<td></td>
+									<td></td>
+									<td></td>
+									<td></td>
+									<td></td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+					<div class="user_body_right_foot_foot_left">
+						<button class="user_body_right_foot_foot_upload"><img src="image/upload.png"/>Upload</button>
+					</div>
+					<div class="user_body_right_foot_foot">
+						<button class="user_body_right_foot_foot_add"><img src="image/tj.png"/>Add</button>
+						<button class="user_body_right_foot_foot_more"><img src="image/fzd.png"/>Copy To</button>
+						<button class="user_body_right_foot_foot_sum"><img src="image/bc.png"/>Save</button>
+					</div>
+					<div class="clear"></div>
+				</div>
+			</div>
+			<div class="clear"></div>
+		</div>
+	</div>
+	<div class="advertise_board_upload_fixed">
+		<div class="advertise_board_upload_fixed_body">
+			<p>Please Upload a File <span class="advertise_board_upload_fixed_body_clear">×</span></p>
+			<div class="advertise_board_upload_fixed_body_home">
+				<table class="advertise_board_upload_fixed_body_home_table">
+					<thead>
+					<tr>
+						<td>URL</td>
+						<td>Type</td>
+						<td>Ad Name</td>
+						<td>peRating</td>
+					</tr>
+					</thead>
+					<tbody class="advertise_board_upload_fixed_body_home_tbody"></tbody>
+				</table>
+				<table class="advertise_board_upload_fixed_body_home_tableS">
+					<thead>
+					<tr>
+						<td>upLoad</td>
+						<td>Select Type</td>
+						<td>Select Ad Name</td>
+						<td>peRating</td>
+					</tr>
+					</thead>
+					<tbody class="advertise_board_upload_fixed_body_home_tbodyS"></tbody>
+				</table>
+			</div>
+			<button class="advertise_board_upload_fixed_body_home_add">Add</button>
+			<!--<button class="advertise_board_upload_fixed_body_submit">Save</button>-->
+		</div>
+	</div>
+	<div class="advertise_board_fixed">
+		<div class="advertise_board_fixed_body">
+			<p>Select Machines<span class="advertise_board_fixed_body_clear">×</span></p>
+			<div class="advertise_board_fixed_body_home">
+				<ul class="advertise_board_fixed_body_home_ul"></ul>
+			</div>
+			<button class="advertise_board_fixed_body_submit">Save</button>
+		</div>
+	</div>
+	<div class="advertise_board_view_fixed">
+	</div>
+	<script type="text/javascript" src="js/advertise_board.js"></script>
+	<script type="text/javascript" src="../lib/plupload-2.1.2/js/plupload.full.min.js"></script>
+	<script type="text/javascript" src="../lib/import/upload.js"></script>
+</body>
+</html>

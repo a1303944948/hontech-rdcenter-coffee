@@ -1,0 +1,380 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8"/>
+	<title>最近状态</title>
+	<link rel="icon" type="image/x-icon" href="image/logos.jpg"/>
+	<link rel="stylesheet" type="text/css" href="css/index.css"/>
+	<link rel="stylesheet" type="text/css" href="css/machine_status.css"/>
+	<script type="text/javascript" src="js/jquery-3.3.1.js"></script>
+	<script type="text/javascript" src="js/wm.js"></script>
+	<script type="text/javascript" src="js/object.js"></script>
+	<style type="text/css">
+		html,body{
+			overflow: hidden;
+		}
+		.status_home{
+			width: 100%;
+			min-width: 1200px;
+			height: auto;
+			overflow: hidden;
+		}
+		.status_head{
+			width: 100%;
+			height: auto;
+			padding: 10px;
+			background-color: #ffffff;
+		}
+		.status_head>table{
+			display: inline-block;
+			border-collapse: collapse;
+		}
+		.status_head>table tr>td{
+			height: 30px;
+			position: relative;
+		}
+		.status_head>table tr>td>input{
+			width: 180px;
+			height: 30px;
+			padding: 3px 5px;
+			border: 1px #d4d4d4 solid;
+			box-sizing: border-box;
+			border-radius: 4px;
+		}
+		.status_head>table tr>td>b{
+			border-top: 5px #666666 solid;
+			border-left: 5px rgba(0,0,0,0) solid;
+			border-right: 5px rgba(0,0,0,0) solid;
+			position: absolute;
+			top: 12px;
+			right: 8px;
+			pointer-events: none;
+		}
+		.status_head_submit{
+			width: 100px;
+			height: 26px;
+			line-height: 26px;
+			background-color: #0C64A8;
+			color: #ffffff;
+			border: none;
+			outline: none;
+			cursor: pointer;
+			border-radius: 5px;
+		}
+		.status_head_submit:hover{
+		  background-color: #0E76C6;
+		}
+		.status_head_submit:active{
+		  background-color: #0C64A8;
+		}
+		.status_head_submit>img{
+			width: 18px;
+			height: 18px;
+			position: relative;
+			top: 4px;
+			margin-right: 5px;
+		}
+		.status_head_select_ul{
+			display: none;
+			height: auto;
+			border-radius: 4px;
+			background-color: #ffffff;
+			border: 1px #d4d4d4 solid;
+			box-sizing: border-box;
+			position: absolute;
+			z-index: 999;
+		}
+		.status_head_select_ul>li{
+			width: calc(100% - 10px);
+			height: 30px;
+			line-height: 30px;
+			padding: 0px 5px;
+			font-size: 14px;
+			cursor: pointer;
+		}
+		.status_head_select_ul>li:hover{
+			background-color: #e5e5e5;
+		}
+		.status_head_select_ul>li:active{
+			background-color: #ffffff;
+		}
+		.status_fixed{
+			width: 100%;
+			height: auto;
+			background-color: #ffffff;
+			border-top: 1px #e5e5e5 solid;
+		}
+		.status_fixed>table{
+			width: 100%;
+			border-collapse: collapse;
+		}
+		.status_fixed>div>table tr{
+			position: relative;
+		}
+		.status_fixed>table tr>td{
+		    display: -webkit-box;
+		    -webkit-box-pack:center;
+		    -webkit-box-align:center;
+		    -webkit-box-orient: vertical;
+		    float: left;
+			height: 50px;
+			font-size: 14px;
+			font-weight: 700;
+			text-align: center;
+			border-right: 1px #e5e5e5 solid;
+			box-sizing: border-box;
+		}
+		.status_body{
+			width: 100%;
+			height: auto;
+			overflow-y: auto;
+		}
+		.status_body>div{
+			width: 100%;
+			height: auto;
+		}
+		.status_body>div>table{
+			width: 100%;
+			border-collapse: collapse;
+		}
+		.status_body>div:last-child>table{
+			border-bottom: 1px #e5e5e5 solid;
+		}
+		.status_body>div>table tr{
+			position: relative;
+		}
+		.status_body>div>table tr>td{
+		    display: -webkit-box;
+		    -webkit-box-pack:center;
+		    -webkit-box-align:center;
+		    -webkit-box-orient: vertical;
+		    float: left;
+			height: 50px;
+			overflow-y: auto;
+			overflow-x: hidden;
+			font-size: 14px;
+			text-align: center;
+			border: 1px #e5e5e5 solid;
+			box-sizing: border-box;
+			border-bottom: none;
+			border-left: none;
+		}
+	</style>
+</head>
+<body>
+	<div class="status_home">
+		<div class="status_head">
+			<table>
+				<tr>
+					<td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;选择时间：</td>
+					<td><input class="status_head_select" type="text" value="请选择..." readonly="readonly"/><b></b></td>
+				</tr>
+			</table>
+			<table>
+				<tr>
+					<td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<button class="status_head_submit"><img src="image/seachs.png"/>查看状态</button></td>
+					<td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;当前设备：<span class="status_head_hostname"></span></td>
+				</tr>
+			</table>
+		</div>
+		<div class="status_fixed">
+			<table>
+				<tr></tr>
+			</table>
+		</div>
+		<div class="status_body"></div>
+	</div>
+	<script type="text/javascript">
+		var temHead = c('status_head')[0];
+		var headSelect = c('status_head_select');
+		var startTime = 0;
+		var endTime = 0;
+		var Tian = 86400000;
+		function dateCreat(endtime,starttime){
+			var datez = new Date(starttime);
+			nian = datez.getFullYear();
+			yue = datez.getMonth() + 1;
+			ri = datez.getDate();
+			startTime = nian + '-' + yue + '-' + ri;
+			var date = new Date(endtime);
+			nian = date.getFullYear();
+			yue = date.getMonth() + 1;
+			ri = date.getDate();
+			endTime = nian + '-' + yue + '-' + (ri+1);
+		}
+		for(var i = 0; i < headSelect.length; i++){
+			var ul = creat('ul');
+			ul.className = "status_head_select_ul";
+			ul.setAttribute('data-list',i);
+			ul.style.minWidth = headSelect[i].clientWidth + 2 + 'px';
+			ul.style.left = headSelect[i].offsetParent.offsetLeft + 'px';
+			ul.style.top = headSelect[i].offsetParent.offsetTop + 29 + 'px';
+			for(var j = 0; j < TEM[i].length; j++){
+				var li = creat('li');
+				li.innerHTML = TEM[i][j];
+				ul.appendChild(li);
+			}
+			temHead.appendChild(ul);
+			var selectUl = c('status_head_select_ul');
+			(function(q){
+				headSelect[q].onfocus = function(){
+					selectUl[q].style.display = 'block';
+				};
+				headSelect[q].onblur = function(){
+					selectUl[q].style.display = 'none';
+				};
+			})(i)
+
+
+			headSelect[0].value = selectUl[i].children[0].innerHTML;
+			var datex = new Date();
+			dateCreat(datex,datex);
+			for(var j = 0; j < selectUl[i].children.length; j++){
+				selectUl[i].children[j].onmousedown = function(){
+					headSelect[this.parentNode.dataset.list].value = this.innerHTML;
+					if(this.innerHTML == '今天'){
+						var dates = new Date();
+						dateCreat(dates,dates);
+					}else if(this.innerHTML == '昨天'){
+						var dates = new Date();
+						dateCreat(dates-Tian,dates-Tian);
+					}else if(this.innerHTML == '最近三天'){
+						var dates = new Date();
+						dateCreat(dates,dates-Tian*2);
+					}else if(this.innerHTML == '最近七天'){
+						var dates = new Date();
+						dateCreat(dates,dates-Tian*6);
+					}
+				}
+			}
+		}
+
+
+		function GetQueryString(name){
+			var reg = new RegExp("(^|&)"+ name +"=([^&]*)(&|$)");
+			var r = window.location.search.substr(1).match(reg);
+			if(r!=null)return  unescape(r[2]); return null;
+	    }
+	    var machCode = GetQueryString('machCode');
+		var machType = GetQueryString('machType');
+
+	    //请求机器名称
+	    $.ajax({
+	    	type: 'post',
+	    	url: URLS + '/status/getHostNameByMachCode.json',
+	    	data: {
+				machCode: machCode,
+	    	},
+	    	success: function(msg){
+	    		c('status_head_hostname')[0].innerHTML = msg.hostName + ' - ' + machCode;
+	    	}
+	    })
+
+	    function timestampToTime(timestamp) {
+	        var date = new Date(timestamp * 1000);//时间戳为10位需*1000，时间戳为13位的话不需乘1000
+	        Y = date.getFullYear() + '-';
+	        M = (date.getMonth()+1 < 10 ? '0'+(date.getMonth()+1) : date.getMonth()+1) + '-';
+	        D = date.getDate() + ' ';
+	        h = date.getHours() + ':';
+	        m = date.getMinutes() + ':';
+	        s = date.getSeconds();
+	        return Y+M+D+h+m+s;
+	    }
+
+	    var submit = c('status_head_submit')[0];
+	    submit.onclick = function(){
+			//请求历史温度
+			if(startTime == 0){
+				alern('请选择时间后再查询!','温馨提醒','好的');
+				return false;
+			}
+			var Start = startTime;
+			var End = endTime;
+			var currentDate = new Date();
+		    var dateDiffS = new Date(Start + ' ' + currentDate.getHours() + ':' + currentDate.getMinutes() + ':' + currentDate.getSeconds());
+		    var dateDiffE = new Date(End + ' ' + currentDate.getHours() + ':' + currentDate.getMinutes() + ':' + currentDate.getSeconds());
+		    Start = worldDate(dateDiffS.getTime());
+		    End = worldDate(dateDiffE.getTime());
+			console.log(Start);
+			console.log(End);
+			$.ajax({
+				type: 'post',
+				url: URLS + '/status/getHistoryStatusC.json',
+				data: {
+					machCode: machCode,
+					startTime: Start,
+					endTime: End,
+					machType: machType,
+				},
+				success: function(data){
+					console.log(data);
+					var temFixed = c('status_fixed')[0].children[0].children[0].children[0];
+					var temBody = c('status_body')[0];
+					temFixed.innerHTML = "";
+					temBody.innerHTML = "";
+					temBody.style.height = window.innerHeight - 105 + 'px';
+
+					//渲染历史状态头部
+					if(data != ""){
+						for(var i = 0; i <　data[0].length; i++){
+							var td = creat('td');
+							td.innerHTML = data[0][i].text;
+							temFixed.appendChild(td);
+						}
+					}
+					//渲染历史状态数据部分
+					for(var i = 0; i < data.length; i++){
+						var div = creat('div');
+						var table = creat('table');
+						var tr = creat('tr');
+						for(var j = 0; j < data[i].length;j++){
+							var td = creat('td');
+							if(!isNaN(Date.parse(timestampToTime(data[i][j].name/1000)))){
+								td.innerHTML = timestampToTime(data[i][j].name/1000);
+								tr.appendChild(td);
+							}else{
+								td.innerHTML = data[i][j].name;
+								tr.appendChild(td);
+							}
+						}
+						table.appendChild(tr);
+						div.appendChild(table); 
+						temBody.appendChild(div);
+						if(i%2 != 0){
+							temBody.children[i].style.backgroundColor = "#fafafa";
+						}
+					}
+
+					//渲染数据头部td宽度
+					for(var i = 0; i < temFixed.children.length; i++){
+						if(100/temFixed.children.length <= 20){
+							temFixed.children[i].style.width = (100-100/temFixed.children.length*2)/(temFixed.children.length-1) + '%';
+						}else{
+							temFixed.children[i].style.width = '250px';
+						}
+						if(i == temFixed.children.length -2){
+							temFixed.children[i].style.width = 100/temFixed.children.length*2 + '%';
+						}
+					}
+					//渲染数据主体td宽度
+					for(var i = 0; i < temBody.children.length; i++){
+						for(var j = 0; j < temBody.children[i].children[0].children[0].children.length;j++){
+							if(100/temBody.children[i].children[0].children[0].children.length <= 20){
+								temBody.children[i].children[0].children[0].children[j].style.width = 100/temBody.children[i].children[0].children[0].children.length + '%';
+								temBody.children[i].children[0].children[0].children[j].style.width = (100-100/temBody.children[i].children[0].children[0].children.length*2)/(temBody.children[i].children[0].children[0].children.length-1) + '%';
+							}else{
+								temBody.children[i].children[0].children[0].children[j].style.width = '250px';
+							}
+							if(j == temBody.children[i].children[0].children[0].children.length -2){
+								console.log(temBody.children[i].children[0].children[0].children[j].innerHTML);
+								temBody.children[i].children[0].children[0].children[j].style.width = 100/temBody.children[i].children[0].children[0].children.length*2 + '%';
+							}
+						}
+					}
+				}
+			})
+	    }
+	    submit.click();
+	</script>
+</body>
+</html>

@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+	<meta charset="utf-8"/>
+	<link rel="icon" type="image/x-icon" href="image/logos.jpg"/>
+	<link rel="stylesheet" type="text/css" href="css/index.css"/>
+	<link rel="stylesheet" type="text/css" href="css/machine_board.css"/>
+	<script type="text/javascript" src="js/jquery-3.3.1.js"></script>
+	<script type="text/javascript" src="js/wm.js"></script>
+	<script type="text/javascript" src="js/object.js"></script>
+</head>
+<body>
+	<script type="text/javascript" src="js/header.js"></script>
+	<div class="user_home">
+		<div class="user_head">
+			<table>
+				<tr>
+					<td>Group</td>
+					<td><input id="user_head_group" class="user_head_grouping" type="text" readonly="readonly"/><b></b></td>
+				</tr>
+			</table>
+			<!-- <table>
+				<tr>
+					<td>输入查询</td>
+					<td><input id="user_head_seach" type="text"></td>
+				</tr>
+			</table> -->
+			<table>
+				<tr>
+					<td>Status</td>
+					<td><input id="user_head_status" class="user_head_select" type="text" readonly="readonly"><b></b></td>
+				</tr>
+			</table>
+			<table>
+				<tr>
+					<td><button id="user_head_grouping" class="user_head_submit"><img src="image/seachs.png"/>Search</button></td>
+				</tr>
+			</table>
+		</div>
+		<div class="user_body">
+			<div class="user_body_left">
+			</div>
+			<div class="user_body_right">
+				<div class="user_body_right_head">
+					<button id="body_creat"><span>+</span>Create</button>
+					<button id="body_submit"><img src="image/bc.png"/>Save</button>					
+					<div class="user_body_right_head_bottom">
+						<ul class="user_body_right_head_bottom_ul"></ul>
+					</div>
+				</div>
+				<div class="user_body_right_foot">
+					<div class="user_body_right_foot_list" data-menuid="204001">
+						<div class="user_body_right_foot_item">
+							<p>Details</p>
+							<table>
+								<tr>
+									<td>Operator : <span>*</span></td>
+									<td><input id="board_operator" class="board_select" readonly="readonly" type="text"/><b></b></td>
+								</tr>
+								<tr>
+									<td>Superior Group:<span>*</span></td>
+									<td><input id="board_purview" class="user_head_grouping" style="cursor: pointer;" readonly="readonly" type="text"/><b></b></td>
+								</tr>
+								<tr>
+									<td>Machine ID : <span>*</span></td>
+									<td><input id="board_machcode" onkeyup="this.value=this.value.replace(/[^\w_]/g,'');" type="text"/></td>
+								</tr>
+								<tr>
+									<td>Machine Name : <span>*</span></td>
+									<td><input id="board_machname" type="text"/></td>
+								</tr>
+								<tr>
+									<td>Machine Type : <span>*</span></td>
+									<td><input id="board_model" class="board_select" readonly="readonly" type="text"/><b></b></td>
+								</tr>
+								<tr>
+									<td>MAC Addr : <span>*</span></td>
+									<td><input id="board_mac" type="text"/></td>
+								</tr>
+								<tr>
+									<td style="min-width: 109px;">Business Way:<span>*</span></td>
+									<td><input id="board_concur" class="board_select" readonly="readonly" type="text"/><b></b></td>
+								</tr>
+								<tr id="board_buys">
+									<td>Date Of Purchase:<span>*</span></td>
+									<td><input id="board_buy" class="board_date" style="cursor: pointer;" readonly="readonly" type="text"/><b></b></td>
+								</tr>
+								<tr id="board_rentstarts">
+									<td>Lease Start Date:<span>*</span></td>
+									<td><input id="board_rentstart" class="board_date" style="cursor: pointer;" readonly="readonly" type="text"/><b></b></td>
+								</tr>
+								<tr id="board_rentends">
+									<td>Lease End Date : <span>*</span></td>
+									<td><input id="board_rentend" class="board_date" style="cursor: pointer;" readonly="readonly" type="text"/><b></b></td>
+								</tr>
+								<tr>
+									<td>Note : </td>
+									<td><textarea id="board_mark"></textarea></td>
+								</tr>
+								<tr>
+									<td><input id="board_stop" type="checkbox"/>Stop</td>
+									<td>&nbsp;</td>
+								</tr>
+							</table>
+						</div>
+						<div class="clear"></div>
+					</div>
+				</div>
+			</div>
+			<div class="clear"></div>
+		</div>
+	</div>
+	<script type="text/javascript" src="js/machine_board.js"></script>
+</body>
+</html>
